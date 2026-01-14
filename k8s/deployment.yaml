@@ -1,0 +1,36 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notificationsapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notificationsapi
+  template:
+    metadata:
+      labels:
+        app: notificationsapi
+    spec:
+      containers:
+        - name: notificationsapi
+          image: ghcr.io/yourorg/fcg_f02_notificationsapi:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: RabbitMQ__Host
+              valueFrom:
+                configMapKeyRef:
+                  name: notificationsapi-config
+                  key: RABBITMQ_HOST
+            - name: RabbitMQ__User
+              valueFrom:
+                configMapKeyRef:
+                  name: notificationsapi-config
+                  key: RABBITMQ_USER
+            - name: RabbitMQ__Pass
+              valueFrom:
+                configMapKeyRef:
+                  name: notificationsapi-config
+                  key: RABBITMQ_PASS
