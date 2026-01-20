@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: notificationsapi
-          image: ghcr.io/yourorg/fcg_f02_notificationsapi:latest
+          image: docker.io/augustogc/fcg_f02_notificationsapi:0.1.0
           ports:
             - containerPort: 8080
           env:
